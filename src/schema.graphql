@@ -13,6 +13,11 @@ type Query {
   Get all Products published by an author
   """
   productsByAuthor(authorName: String!): [Product!]!
+
+  """
+  Get products by Category
+  """
+  productsByCategory(slug: String!): [Product!]!
 }
 
 type Product {
@@ -22,10 +27,17 @@ type Product {
   numberOfVotes: Int!
   publishedAt: String!
   author: User!
+  categories: [Category!]!
 }
 
 type User {
   id: ID!
   userName: String!
   fullName: String!
+}
+
+type Category {
+  id: Int!
+  slug: String!
+  name: String!
 }
