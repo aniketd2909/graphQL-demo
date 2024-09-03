@@ -1,7 +1,18 @@
 type Query {
+  """
+  Get the name of this application
+  """
   appName: String
 
+  """
+  Get all posted product
+  """
   allProducts: [Product!]!
+
+  """
+  Get all Products published by an author
+  """
+  productsByAuthor(authorName: String!): [Product!]!
 }
 
 type Product {

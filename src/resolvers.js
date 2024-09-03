@@ -41,9 +41,17 @@ const usersData = [
 const resolvers = {
   Query: {
     appName: () => "ProductHunt clone",
-
     allProducts: () => {
       return productsData;
+    },
+    productsByAuthor: (_, args) => {
+      const user = usersData.find((user) => user.userName === args.authorName);
+
+      const products = productsData.filter(
+        (product) => product.authorId === user.id
+      );
+
+      return products;
     },
   },
 
