@@ -1,22 +1,18 @@
-const { ApolloServer, gql } = require("apollo-server");
+const { ApolloServer } = require("apollo-server");
+const { readSchema } = require("./schema.js");
+const { resolvers } = require("./resolvers.js");
+const {
+  ApolloServerPluginLandingPageGraphQLPlayground,
+} = require("apollo-server-core");
 
-const typeDefs = gql`
-  type Query {
-    appName: Int
-  }
-`;
-
-const resolvers = {
-  Query: {
-    appName: () => 2,
-  },
-};
+const typeDefs = readSchema();
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
 });
 
-server.listen().then(() => {
-  console.log("Listening on port 4000");
+server.listen(4001).then(() => {
+  console.log("Listening on port 4001");
 });
